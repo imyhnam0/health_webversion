@@ -26,7 +26,7 @@ const Login = () => {
       setLoginCheck(false);
       localStorage.setItem("accessToken", result.data.accessToken);
       console.log("토큰", localStorage);
-      // navigate('/diet'); // 원하는 페이지로 이동
+      navigate("/Homepage");  // 원하는 페이지로 이동
     } else {
       setLoginCheck(true);
     }

@@ -24,4 +24,22 @@ public class UserController {
         userRepository.save(user);
         return ResponseEntity.ok("{\"message\": \"회원가입이 완료되었습니다.\"}");
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody User loginUser) {
+        User user = userRepository.findByEmail(loginUser.getEmail());
+
+        if (user != null && user.getPassword().equals(loginUser.getPassword())) {
+            return ResponseEntity.ok().body(
+                java.util.Map.of(
+                    "message", "로그인 성공",
+                    "data", java.util.Map.of("accessToken", "fake-jwt-token")
+                )
+            );
+        } else {
+            return ResponseEntity.status(401).body("이메일 또는 비밀번호가 올바르지 않습니다.");
+        }
+    }
+
 }
+
