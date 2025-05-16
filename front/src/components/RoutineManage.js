@@ -12,6 +12,32 @@ const RoutineManage = () => {
   const [selectedWorkout, setSelectedWorkout] = useState(null);
   const [calendarDate, setCalendarDate] = useState(new Date());
   const [dailyRecord, setDailyRecord] = useState(null);
+  const [routineDatesByPart, setRoutineDatesByPart] = useState({});
+
+  useEffect(() => {
+    const fetchRoutineDatesByPart = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+  
+      const snap = await getDocs(collection(db, "users", user.uid, "Calender", "health", "routines"));
+      const grouped = {};
+  
+      snap.forEach((doc) => {
+        const data = doc.data();
+        const date = data["날짜"];
+        const part = data["오늘 한 루틴이름"];
+  
+        if (!grouped[part]) grouped[part] = [];
+        grouped[part].push(date);
+      });
+  
+      setRoutineDatesByPart(grouped);
+    };
+  
+    fetchRoutineDatesByPart();
+  }, []);
+  
+
 
   useEffect(() => {
     const fetchRoutine = async () => {
@@ -59,10 +85,10 @@ const RoutineManage = () => {
         {Object.entries(routineData).map(([part, workouts]) => (
           <div key={part} className="routine-part">
             <h3
-              className="routine-part-title"
-              onClick={() => setSelectedPart(part === selectedPart ? null : part)}
+            className={`routine-part-title ${selectedPart === part ? "selected-part" : ""}`}
+            onClick={() => setSelectedPart(part === selectedPart ? null : part)}
             >
-              - {part}
+            - {part}
             </h3>
             {selectedPart === part &&
               workouts.map((workout, index) => {
@@ -98,9 +124,15 @@ const RoutineManage = () => {
       <div className="calendar-box">
         <h3 className="calendar-title">📅 루틴 기록 달력</h3>
         <Calendar
-          onChange={setCalendarDate}
-          value={calendarDate}
-          className="custom-calendar"
+            onChange={setCalendarDate}
+            value={calendarDate}
+            className="custom-calendar"
+            tileClassName={({ date }) => {
+                const formatted = date.toISOString().split("T")[0];
+                const matchedDates = routineDatesByPart[selectedPart] || [];
+
+                return matchedDates.includes(formatted) ? "highlighted-day" : null;
+            }}
         />
         <p className="calendar-selected-date">
           선택된 날짜: {calendarDate.toLocaleDateString()}
@@ -123,3 +155,4 @@ const RoutineManage = () => {
 };
 
 export default RoutineManage;
+

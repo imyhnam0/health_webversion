@@ -25,8 +25,14 @@
     color: #007bff;
     cursor: pointer;
     margin-bottom: 10px;
-    transition: color 0.3s ease;
   }
+  .highlighted-day {
+    background-color: #ffcccc !important;
+    border-radius: 8px;
+    font-weight: bold;
+    color: red !important;
+  }
+  
   
   .routine-part-title:hover {
     color: #0056b3;
@@ -48,6 +54,12 @@
   .routine-workout-name:hover {
     color: #17a2b8;
   }
+  .selected-part {
+    color: red;
+    font-weight: bold;
+  }
+  
+  
   
   .routine-sets {
     margin-left: 30px;
