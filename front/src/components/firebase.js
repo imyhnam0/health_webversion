@@ -1,11 +1,9 @@
-// Import the functions you need from the SDKs you need
+// src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth"; // ✅ 추가
+import { getFirestore } from "firebase/firestore"; // ✅ Firestore 추가
+// import { getAnalytics } from "firebase/analytics"; // ⚠️ 개발 중이면 이 줄 주석 처리해도 됨
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyBfJbLDJTCzbP155rUcHu5WCVzP27sZaiY",
   authDomain: "summer-eebb6.firebaseapp.com",
@@ -16,6 +14,12 @@ const firebaseConfig = {
   measurementId: "G-50RWGH3FCE"
 };
 
-// Initialize Firebase
+// Firebase 초기화
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+
+// 인증 객체 생성
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+// analytics는 HTTPS 환경에서만 동작하므로 개발 중이면 생략 가능
+// const analytics = getAnalytics(app); // ⚠️ 필요할 때만 사용

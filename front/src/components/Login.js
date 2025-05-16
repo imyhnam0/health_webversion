@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"; // 스타일링 파일 추가
+import "./Login.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase"; // 경로 확인
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,24 +12,17 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    await new Promise((r) => setTimeout(r, 1000));
 
-    const response = await fetch("http://localhost:8080/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const token = await userCredential.user.getIdToken(); // Firebase 토큰
+      localStorage.setItem("accessToken", token);
+      console.log("Firebase 토큰", token);
 
-    const result = await response.json();
-
-    if (response.status === 200) {
       setLoginCheck(false);
-      localStorage.setItem("accessToken", result.data.accessToken);
-      console.log("토큰", localStorage);
-      navigate("/Homepage");  // 원하는 페이지로 이동
-    } else {
+      navigate("/Homepage");
+    } catch (error) {
+      console.error("로그인 실패:", error.message);
       setLoginCheck(true);
     }
   };
@@ -35,7 +30,7 @@ const Login = () => {
   return (
     <div className="login-wrapper">
       <div className="login-box">
-        <h2 className="title">남윤형의 식단</h2>
+        <h2 className="title">Life is gorip</h2>
         <form onSubmit={handleLogin}>
           <input
             type="text"

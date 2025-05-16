@@ -1,0 +1,104 @@
+.routine-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 16px;
+    background-color: #fefefe;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .routine-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .routine-part {
+    margin-bottom: 20px;
+  }
+  
+  .routine-part-title {
+    font-size: 20px;
+    color: #007bff;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .routine-part-title:hover {
+    color: #0056b3;
+  }
+  
+  .routine-workout {
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .routine-workout-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #495057;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .routine-workout-name:hover {
+    color: #17a2b8;
+  }
+  
+  .routine-sets {
+    margin-left: 30px;
+    margin-top: 8px;
+  }
+  
+  .routine-set-item {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  .calendar-box {
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+  }
+  
+  .calendar-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .custom-calendar {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .calendar-selected-date {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .calendar-record {
+    background: #f1f3f5;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  
+  .calendar-no-record {
+    margin-top: 10px;
+    color: #999;
+    font-size: 14px;
+  }
+  
+  
