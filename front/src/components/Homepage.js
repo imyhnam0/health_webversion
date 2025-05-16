@@ -1,15 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Homepage.css"; // 필요 시 스타일링
+import { useEffect } from "react";
+
 
 const Homepage = () => {
   const navigate = useNavigate();
 
   return (
     <div className="homepage-container">
-      <h1 className="homepage-title">홈페이지</h1>
+      <h1 className="homepage-title">Life is gorip</h1>
       <div className="button-group">
-        <button className="homepage-button" onClick={() => navigate("/diet")}>
+        <button className="homepage-button" onClick={() => navigate("/FoodManage")}>
           식단관리
         </button>
         <button className="homepage-button" onClick={() => navigate("/routine")}>
